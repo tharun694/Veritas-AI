@@ -17,7 +17,10 @@ public class ModelController {
 
     @Autowired
     private ModelService modelService;
-
+@GetMapping("/greet")
+public String message(){
+    return "hello project is working fine";
+}
     @PostMapping("/train")
     public String trainModel(@RequestParam MultipartFile file,
                              @RequestParam String modelType,
