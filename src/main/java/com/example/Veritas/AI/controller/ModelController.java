@@ -43,6 +43,4 @@ public class ModelController {
         SyntheticResponse response = modelService.generateSynthetic(sessionId);
         return ResponseEntity.ok(response);
     }
-
-
 }
