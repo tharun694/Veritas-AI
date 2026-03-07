@@ -11,7 +11,7 @@ public class RawData {
     private String sessionId;
     @Column(name="row_data_json",columnDefinition = "TEXT")
     private String rowDataJson;
-    @Column(name="row_number")
+    @Column(name="row_num")
     private Integer rowNumber;
     public RawData(){}
 
