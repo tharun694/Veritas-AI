@@ -9,8 +9,10 @@ public class RawData {
 
     private Long id;
     private String sessionId;
+    @Column(name="row_data_json",columnDefinition = "TEXT")
     private String rowDataJson;
-    private int rowNumber;
+    @Column(name="row_number")
+    private Integer rowNumber;
     public RawData(){}
 
     public RawData( String sessionId, String rowDataJson, int rowNumber) {
