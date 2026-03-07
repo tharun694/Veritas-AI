@@ -9,7 +9,6 @@ public class RawData {
 
     private Long id;
     private String sessionId;
-    @Column(columnDefinition = "CLOB")
     private String rowDataJson;
     private int rowNumber;
     public RawData(){}
