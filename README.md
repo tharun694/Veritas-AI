@@ -135,22 +135,6 @@ Create a MySQL database:
 ```sql
 CREATE DATABASE veritas_ai;
 ```
-
-Update `application.properties`:
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/veritas_ai
-spring.datasource.username=your_username
-spring.datasource.password=your_password
-
-# JWT Secret Key
-jwt.secret=your-secret-key-here
-jwt.expiration=86400000
-
-# Hibernate Settings
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-```
-
 3. **Build the project**
 ```bash
 mvn clean install
@@ -160,95 +144,12 @@ mvn clean install
 ```bash
 mvn spring-boot:run
 ```
-
 The API will be available at `http://localhost:8080`
-
-## 📚 API Documentation
-
-### Authentication Endpoints
-
-#### Register User
-```http
-POST /api/auth/register
-Content-Type: application/json
-
-{
-  "username": "john_doe",
-  "email": "john@example.com",
-  "password": "SecurePass123",
-  "role": "USER"
-}
-```
-
-#### Login
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "john@example.com",
-  "password": "SecurePass123"
-}
-
-Response:
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "type": "Bearer",
-  "username": "john_doe",
-  "email": "john@example.com",
-  "roles": ["ROLE_USER"]
-}
-```
-
-### User Management (Admin Only)
-
 #### Get All Users
 ```http
 GET /api/admin/users
 Authorization: Bearer {token}
 ```
-
-#### Update User
-```http
-PUT /api/admin/users/{id}
-Authorization: Bearer {token}
-Content-Type: application/json
-
-{
-  "username": "updated_name",
-  "email": "updated@example.com",
-  "role": "MENTOR"
-}
-```
-
-#### Delete User
-```http
-DELETE /api/admin/users/{id}
-Authorization: Bearer {token}
-```
-
-### Course Management
-
-#### Create Course
-```http
-POST /api/admin/courses
-Authorization: Bearer {token}
-Content-Type: application/json
-
-{
-  "title": "Machine Learning Fundamentals",
-  "description": "Introduction to ML concepts",
-  "mentorId": 5,
-  "duration": 40,
-  "category": "AI/ML"
-}
-```
-
-#### Get All Courses
-```http
-GET /api/courses
-```
-
 ### ML Model Training
 
 #### Start Training
@@ -358,7 +259,7 @@ List<User> findUsersByRoleWithCourses(@Param("role") Role role);
 
 ### Caching Strategy
 ```java
-@Cacheable(value = "courses", key = "#id")
+@Cacheable
 public Course getCourseById(Long id) {
     return courseRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Course not found"));
