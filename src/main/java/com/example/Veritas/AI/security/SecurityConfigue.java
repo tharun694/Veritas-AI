@@ -25,16 +25,17 @@ JwtAuthFilter filter;
     public  SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
 
 
-        http.csrf(csrf->csrf.disable())
-                .authorizeHttpRequests(auth->auth
-                        .requestMatchers("/register","/login").permitAll()
-                        .anyRequest()
-                        .authenticated()
-                ).sessionManagement(session->session.
-                        sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ).addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-
-
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        // Allow login, register, and all static assets
+                        .requestMatchers("/register", "/login", "/error").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
     @Bean
