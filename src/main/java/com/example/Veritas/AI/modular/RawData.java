@@ -3,6 +3,7 @@ package com.example.Veritas.AI.modular;
 import jakarta.persistence.*;
 
 @Entity
+
 public class RawData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

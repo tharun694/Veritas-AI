@@ -11,5 +11,6 @@ import java.util.List;
     public interface RawDataRepository extends JpaRepository<RawData,Long>{
 
     List<RawData> findBySessionId(String sessionId);
+
 }
 

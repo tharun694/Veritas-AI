@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
-@CrossOrigin(origins = "https://veritasa.netlify.app/")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 
 public class ModelController {
