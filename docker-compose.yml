@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  # Service 1: Your Database
+  db:
+    image: mysql:8.0-debian  # Light version to save space
+    environment:
+      MYSQL_ROOT_PASSWORD: sql@123
+      MYSQL_DATABASE: fintable
+    ports:
+      - "3307:3306"
+
+  # Service 2: Your Spring Boot App
+  app:
+    build: .  # Uses your Dockerfile with Alpine JRE
+    ports:
+      - "8070:8080"
+    depends_on:
+      - db
+    environment:
+      # Link app to the DB service name above
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/fintable
